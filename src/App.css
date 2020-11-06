@@ -1,7 +1,20 @@
-.App {
-  text-align: center;
+.app__home{
+  display: flex;
+  /* flex-direction: column; */
+  
+  
 }
 
+.app__component{
+  margin-left: 200px;
+}
+
+/* 
+ .App {
+  display: flex;
+} */
+
+/*
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -35,4 +48,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */
