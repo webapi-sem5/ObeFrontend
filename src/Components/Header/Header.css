@@ -1,0 +1,27 @@
+.header__main{
+        height: 100px;
+        padding-top: 20px;
+        padding-left: 400px;
+       width:100%;
+        background-color: #837d7d60;
+        color: black;
+       
+        
+        /* position: fixed; */
+}
+
+.header__left{
+    
+    display: flex;
+  
+  
+   
+}
+
+.header__right{
+    display: flex;
+   
+    
+   
+}
+

@@ -1,0 +1,69 @@
+  .sidebar__main{
+    background-color:#eee;
+    position: fixed;
+    width: 200px;
+    height: 100%;
+    /* margin-top: -85px; */
+  }     
+    
+    
+    /* .sidebar__logo {
+        height: 50px;
+        width: 50px;
+    }
+
+    .categoryHeader {
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+    
+    
+    .categoryHeaderPrimary{
+      color: white;
+    }
+
+
+
+    .item {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      color: 'rgba(255, 255, 255, 0.7)';
+        
+      }
+
+      .item :hover{
+        background-color: 'rgba(255, 255, 255, 0.08)';
+      }
+
+
+    .itemCategory {
+      background-color: '#232f3e';
+      box-shadow: '0 -1px 0 #404854 inset';
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+
+
+    .firebase {
+    
+      font-size: 24;
+      color: white;
+    }
+
+    .itemActiveItem {
+      color: '#4fc3f7';
+    }
+
+    .itemPrimary{
+      font-size: 'inherit';
+    }
+
+    .itemIcon {
+      min-width: 'auto';
+      margin-right: 20px;
+    }
+
+
+    .divider {
+      margin-top: 20px;
+    } */
