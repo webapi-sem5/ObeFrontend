@@ -48,3 +48,57 @@ function Row(props) {
     <React.Fragment>
       <TableRow className={classes.root}>
         <TableCell>
+<IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+          </IconButton>
+        </TableCell>
+        <TableCell component="th" scope="row">
+          {row.no}
+        </TableCell>
+        <TableCell align="right">{row.pocode}</TableCell>
+        <TableCell align="right">{row.poname}</TableCell>
+        <TableCell align="right">{row.description}</TableCell>
+        <TableCell align="right">{row.moredetails}</TableCell>
+        <TableCell align="right"> <EditIcon/> </TableCell>
+        <TableCell align="right"><DeleteIcon/></TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <Box margin={1}>
+              <Typography variant="h6" gutterBottom component="div">
+                Description
+              </Typography>
+              <Table size="small" aria-label="purchases">
+                <TableHead>
+                  <TableRow>
+                        <TableCell>The description part goes here...</TableCell>
+                   </TableRow>
+               
+                </TableHead>
+              </Table>
+            </Box>
+          </Collapse>
+        </TableCell>
+      </TableRow>
+    </React.Fragment>
+  );
+}
+
+Row.propTypes = {
+  row: PropTypes.shape({
+    pocode: PropTypes.number.isRequired,
+    poname: PropTypes.number.isRequired,
+    description: PropTypes.number.isRequired,
+    moredetails: PropTypes.arrayOf(
+      PropTypes.shape({
+        amount: PropTypes.number.isRequired,
+        customerId: PropTypes.string.isRequired,
+        date: PropTypes.string.isRequired,
+      }),
+    ).isRequired,
+    name: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    protein: PropTypes.number.isRequired,
+  }).isRequired,
+};
