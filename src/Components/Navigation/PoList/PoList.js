@@ -48,15 +48,15 @@ function Row(props) {
     <React.Fragment>
       <TableRow className={classes.root}>
         <TableCell>
-<IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+          <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
           {row.no}
         </TableCell>
-        <TableCell align="right">{row.pocode}</TableCell>
-        <TableCell align="right">{row.poname}</TableCell>
+        <TableCell align="right">{row.locode}</TableCell>
+        <TableCell align="right">{row.loname}</TableCell>
         <TableCell align="right">{row.description}</TableCell>
         <TableCell align="right">{row.moredetails}</TableCell>
         <TableCell align="right"> <EditIcon/> </TableCell>
@@ -87,8 +87,8 @@ function Row(props) {
 
 Row.propTypes = {
   row: PropTypes.shape({
-    pocode: PropTypes.number.isRequired,
-    poname: PropTypes.number.isRequired,
+    locode: PropTypes.number.isRequired,
+    loname: PropTypes.number.isRequired,
     description: PropTypes.number.isRequired,
     moredetails: PropTypes.arrayOf(
       PropTypes.shape({
@@ -102,3 +102,42 @@ Row.propTypes = {
     protein: PropTypes.number.isRequired,
   }).isRequired,
 };
+
+const rows = [
+  createData(1, "PO", "PO", "Description", "Program Outcome"),
+  createData(2, "PO", "PO", "Description", "Program Outcome"),
+  createData(3, "PO", "PO", "Description", "Program Outcome"),
+  createData(4, "PO", "PO", "Description", "Program Outcome"),
+  createData(5, "PO", "PO", "Description", "Program Outcome"),
+  createData(6, "PO", "PO", "Description", "Program Outcome"),
+  createData(7, "PO", "PO", "Description", "Program Outcome"),
+ 
+];
+
+export default function PoList() {
+  return (
+    <TableContainer component={Paper}>
+         <h3 style={{textAlign:"center"}}>PROGRAM OUTCOME LIST</h3>
+      <Table aria-label="collapsible table">
+         
+        <TableHead >
+          <TableRow>
+            <TableCell  />
+            <TableCell  style={{fontWeight:"bold", fontSize:"18px"}}  >No</TableCell>
+            <TableCell  style={{fontWeight:"bold", fontSize:"18px"}} align="right">PO Code</TableCell>
+            <TableCell style={{fontWeight:"bold", fontSize:"18px"}}  align="right">PO Name</TableCell>
+            <TableCell  style={{fontWeight:"bold", fontSize:"18px"}} align="right">Description</TableCell>
+            <TableCell style={{fontWeight:"bold", fontSize:"18px"}}  align="right">More Details</TableCell>
+            <TableCell style={{fontWeight:"bold", fontSize:"18px"}}  align="right">Edit</TableCell>
+            <TableCell style={{fontWeight:"bold", fontSize:"18px"}}  align="right">Delete</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rows.map((row) => (
+            <Row key={row.name} row={row} />
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+}
