@@ -36,7 +36,7 @@ function AssignThreshold(props) {
 
     console.log(data);
 
-    axios.post("https://localhost:44333/api/threshold", data).then((res) => {
+    axios.post("https://obesystem.azurewebsites.net/api/threshold", data).then((res) => {
       console.log(res);
       console.log(res.data);
     });
@@ -45,7 +45,7 @@ function AssignThreshold(props) {
       thresholdid: thresholdId,
     };
 
-    axios.put(`https://localhost:44333/api/module/${ModuleId}`, dataId);
+    axios.put(`https://obesystem.azurewebsites.net/api/module/${ModuleId}`, dataId);
   };
 
   const useStyle = makeStyles((theme) => ({

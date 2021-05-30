@@ -34,13 +34,17 @@ function Student(props) {
   const [registrationNumber, setRegistrationNumber] = useState("");
   const [batch, setBatch] = useState("");
   var [student, setStudent] = useState([]);
+  const [selectStudent, setSelectStudent] = useState([]);
   const [batchId, setBatchId] = useState()
   
 
   useEffect(() => {
-    axios.get("https://localhost:44333/api/student").then((response) => {
+    axios.get("https://obesystem.azurewebsites.net/api/student").then((response) => {
       console.log(response);
-      setStudent(response.data);
+      setSelectStudent(response.data);
+      const studentBatch = new Map([...(response.data).map(stud=>[stud.batch])]);
+      console.log("This is from student batch >>>>>>>>", studentBatch)
+      setStudent([...studentBatch]); 
       console.log(response.data);
     });
 
@@ -49,7 +53,7 @@ function Student(props) {
 
   const handleDeleteLo = (id) => {
     axios
-      .delete(`https://localhost:44333/api/student/${id}`)
+      .delete(`https://obesystem.azurewebsites.net/api/student/${id}`)
       .then((response) => {
         console.log(response.data);
       });
@@ -65,7 +69,7 @@ function Student(props) {
     };
     console.log(data);
 
-    axios.post("https://localhost:44333/api/student", data).then((res) => {
+    axios.post("https://obesystem.azurewebsites.net/api/student", data).then((res) => {
       console.log(res);
       console.log(res.data);
     });
@@ -93,11 +97,11 @@ function Student(props) {
             
           >
             <MenuItem value="" disabled>Batch</MenuItem>
-            {student.map((stu) => (
-              <MenuItem value={stu.batch}>
-                {stu.batch}
-              </MenuItem>
-            ))}
+            {student.map(([batch]) => {
+              return(<MenuItem value={batch}>
+                {batch}
+              </MenuItem>)
+            })}
           </Select>
 
       <form onSubmit={handleSubmit}>
@@ -189,7 +193,7 @@ function Student(props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {student.filter(stu => stu.batch === batchId ).map((row, index) => (
+            {selectStudent.filter(stu => stu.batch === batchId ).map((row, index) => (
               <TableRow key={row.id}>
                 <TableCell align="center">{index + 1}</TableCell>
                 <TableCell align="center">{row.registration_number}</TableCell>

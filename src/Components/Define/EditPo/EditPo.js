@@ -15,7 +15,7 @@ function DefinePo(props) {
   let PoId = props.match.params.id;
 
   useEffect(() => {
-    axios.get(`https://localhost:44333/api/Polist/${PoId}`).then((res) => {
+    axios.get(`https://obesystem.azurewebsites.net/api/Polist/${PoId}`).then((res) => {
       // console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",res.data);
       setPo(res.data);
     });
@@ -29,7 +29,7 @@ function DefinePo(props) {
     console.log(data);
 
     axios
-      .put(`https://localhost:44333/api/Polist/${PoId}`, data)
+      .put(`https://obesystem.azurewebsites.net/api/Polist/${PoId}`, data)
       .then((res) => {
         console.log(res.data);
       });

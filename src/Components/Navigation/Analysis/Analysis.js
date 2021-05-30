@@ -22,13 +22,13 @@ const Analysis = () => {
   const [total, setTotal] = useState();
 
   useEffect(() => {
-    axios.get("https://localhost:44333/api/Assessment").then((response) => {
+    axios.get("https://obesystem.azurewebsites.net/api/Assessment").then((response) => {
       console.log("This is coming from Assessment ", response.data);
       setAssessments(response.data);
       setlolist(response.data.lolist);
       setStudentList(response.data.studentlist);
 
-      axios.get("https://localhost:44333/api/student").then((response) => {
+      axios.get("https://obesystem.azurewebsites.net/api/student").then((response) => {
         console.log("This is coming from students ", response.data);
         setStudents(response.data);
 
@@ -150,6 +150,9 @@ const Analysis = () => {
               },
             }}
           />
+
+
+          
         </Grid>
         <Grid item xs={6}></Grid>
       </Grid>

@@ -41,10 +41,15 @@ const StudentMarks = () => {
 
   const [moduleName, setModuleName] = useState([]);
 
+  const [uniqueModule, setUniqueModule] = useState([]);  
+  const [uniqueStudent, setUniqueStudent] = useState([]);
+
   useEffect(() => {
     // console.log('useEffect',lomark.mark)
-    axios.get("https://localhost:44333/api/Assessment").then((response) => {
+    axios.get("https://obesystem.azurewebsites.net/api/Assessment").then((response) => {
       console.log("This is coming from Assessment ", response.data);
+      const uniquemodule =  new Map([...(response.data).map(stud=>[stud.module.module_name])]);
+      setUniqueModule([...uniquemodule]);
       setAssessments(response.data);
       setModuleName((state) => [
         ...state,
@@ -55,8 +60,10 @@ const StudentMarks = () => {
     });
 
     axios
-      .get("https://localhost:44333/api/student/")
+      .get("https://obesystem.azurewebsites.net/api/student/")
       .then((response) => {
+        const uniquestudent = new Map([...(response.data).map(stud=>[stud.batch])]);
+         setUniqueStudent([...uniquestudent]);
         setStudents(response.data);
       })
       .catch((e) => {
@@ -68,7 +75,7 @@ const StudentMarks = () => {
     const assessmentId = event.target.value;
     setAssessmentId(assessmentId);
     axios
-      .get(`https://localhost:44333/api/Assessment/${assessmentId}`)
+      .get(`https://obesystem.azurewebsites.net/api/Assessment/${assessmentId}`)
       .then((response) => {
         console.log("This is coming from Assessment ", response.data);
         setAssessment(response.data);
@@ -79,7 +86,7 @@ const StudentMarks = () => {
   const OnModuleChange = (event) => {
     const moduleName = event.target.value;
 
-    setModuleAss(assessments.filter((x) => x.module.id === moduleName));
+    setModuleAss(assessments.filter((x) => x.module.module_name === moduleName));
   };
 
   const OnStudentsChange = (event) => {
@@ -87,7 +94,7 @@ const StudentMarks = () => {
     setStudentid(studentid);
 
     axios
-      .get(`https://localhost:44333/api/student/${studentid}`)
+      .get(`https://obesystem.azurewebsites.net/api/student/${studentid}`)
       .then((response) => {
         console.log("This is coming from Assessment ", response.data);
         setStudent(response.data);
@@ -112,11 +119,11 @@ const StudentMarks = () => {
     console.log("This Assessment sending data", assessmentStudent);
 
     // axios
-    //   .put(`https://localhost:44333/api/student/${studentId}`, data)
+    //   .put(`https://obesystem.azurewebsites.net/api/student/${studentId}`, data)
     //   .then((response) => {
     //     console.log('Add student success');
     axios
-      .post("https://localhost:44333/api/assessmentstudents", assessmentStudent)
+      .post("https://obesystem.azurewebsites.net/api/assessmentstudents", assessmentStudent)
       .then((response) => {
         console.log("assessmentStudent added success");
         for (const [key, value] of Object.entries(lomark)) {
@@ -127,7 +134,7 @@ const StudentMarks = () => {
           };
           console.log({ studentlo });
           axios
-            .post("https://localhost:44333/api/studentlolists", studentlo)
+            .post("https://obesystem.azurewebsites.net/api/studentlolists", studentlo)
             .then((response) => {
               console.log(`lo id ${key} inserted into server student lo `);
             })
@@ -169,9 +176,9 @@ const StudentMarks = () => {
             <MenuItem value="" disabled>
               Module
             </MenuItem>
-            {assessments.map((assessment) => (
-              <MenuItem value={assessment.module.id}>
-                {assessment.module.module_name}
+            {uniqueModule.map(([module_name]) => (
+              <MenuItem value={module_name}>
+                {module_name}
               </MenuItem>
             ))}
           </Select>
@@ -205,8 +212,8 @@ const StudentMarks = () => {
               Batch
             </MenuItem>
 
-            {students.map((stu) => (
-              <MenuItem value={stu.batch}>{stu.batch}</MenuItem>
+            {uniqueStudent.map(([batchName]) => (
+              <MenuItem value={batchName}>{batchName}</MenuItem>
             ))}
           </Select>
 

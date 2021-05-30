@@ -2,8 +2,21 @@ import { Grid } from "@material-ui/core";
 import React from "react";
 import Controls from "../Components/controls/Control";
 import { useState } from "react";
-import { makeStyles } from "@material-ui/core";
+
 import axios from "axios";
+import * as yup from "yup";
+import { withFormik } from "formik";
+import { TextField, makeStyles } from "@material-ui/core";
+
+const validationsForm = {
+  moduleName: yup.string().required("Required"),
+  code: yup.string().required("Required"),
+  semester: yup.string().required("Required"),
+  lecturer: yup.string().required("Required"),
+  gpa: yup.string().required("Required"),
+  type: yup.string().required("Select Module Type"),
+  department: yup.string().required("Select a Department"),
+};
 
 const typeofCourseItems = [
   { id: "1", titles: "GPA" },
@@ -13,7 +26,7 @@ const typeofCourseItems = [
 const typeofCourseModule = [
   { id: "General Elective", titles: "General Elective" },
   { id: "Technical Elective", titles: "Technical Elective" },
-  { id: "Compulsory Modules", titles: "Compulsory Modules" }
+  { id: "Compulsory Modules", titles: "Compulsory Modules" },
 ];
 
 const getDepartmentCollection = [
@@ -35,7 +48,13 @@ const getDepartmentCollection = [
   },
 ];
 
-function EmpolyeeForm() {
+function EmpolyeeForm(props) {
+  const {
+    touched,
+    errors,
+    handleBlur,
+  } = props;
+
   const [module, setModule] = useState("");
   const [code, setCode] = useState("");
   const [type, setType] = useState("");
@@ -61,7 +80,7 @@ function EmpolyeeForm() {
 
     console.log(data);
 
-    axios.post("https://localhost:44333/api/module", data).then((res) => {
+    axios.post("https://obesystem.azurewebsites.net/api/module", data).then((res) => {
       console.log(res);
       console.log(res.data);
     });
@@ -82,44 +101,60 @@ function EmpolyeeForm() {
     <form className={classes.root} onSubmit={handleSubmit}>
       <Grid container>
         <Grid item xs={6}>
-          <Controls.Input
-            name="Name"
+          <TextField
+            name="moduleName"
             label="Module Title"
             onChange={(e) => setModule(e.target.value)}
+            variant="outlined"
+            onBlur={handleBlur}
+            helperText={touched.moduleName ? errors.moduleName : ""}
+            error={touched.moduleName && Boolean(errors.moduleName)}
           />
-          <Controls.Input
+          <TextField
             label="Module Code"
-            name="Code"
+            name="code"
             onChange={(e) => setCode(e.target.value)}
+            variant="outlined"
+            onBlur={handleBlur}
+            helperText={touched.code ? errors.code : ""}
+            error={touched.code && Boolean(errors.code)}
           />
-          <Controls.Input
+          <TextField
             label="Semester"
-            name="Semester"
+            name="semester"
             onChange={(e) => setSemester(e.target.value)}
+            variant="outlined"
+            onBlur={handleBlur}
+            helperText={touched.semester ? errors.semester : ""}
+            error={touched.semester && Boolean(errors.semester)}
           />
-          <Controls.Input
+          <TextField
             label="Lecturer"
-            name="Lecturer"
+            name="lecturer"
             onChange={(e) => setLecturer(e.target.value)}
+            variant="outlined"
+            onBlur={handleBlur}
+            helperText={touched.lecturer ? errors.lecturer : ""}
+            error={touched.lecturer && Boolean(errors.lecturer)}
           />
         </Grid>
         <Grid item xs={6}>
           <Controls.RadioGroup
-            name="Gpa"
+            name="gpa"
             label="GPA/Non-GPA"
             onChange={(e) => setGpa(e.target.value)}
             items={typeofCourseItems}
           />
 
           <Controls.RadioGroup
-            name="Type"
+            name="type"
             label="Type of Module"
             onChange={(e) => setType(e.target.value)}
             items={typeofCourseModule}
           />
 
           <Controls.Select
-            name="Department"
+            name="department"
             label="Department"
             onChange={(e) => setDepartment(e.target.value)}
             options={getDepartmentCollection}
@@ -129,7 +164,6 @@ function EmpolyeeForm() {
             label="Date"
             onChange={(e) => setDate(e.target.value)}
           />
-
 
           <div>
             <Controls.Button
@@ -146,4 +180,8 @@ function EmpolyeeForm() {
   );
 }
 
-export default EmpolyeeForm;
+const Form = withFormik({
+  validationSchema: yup.object().shape(validationsForm),
+})(EmpolyeeForm);
+
+export default Form;

@@ -19,7 +19,7 @@ function AssignedAssessment(props) {
   let moduleId = props.match.params.id;
 
   useEffect(() => {
-    axios.get("https://localhost:44333/api/Assessment").then((response) => {
+    axios.get("https://obesystem.azurewebsites.net/api/Assessment").then((response) => {
       console.log("This is coming from Assessment ", response.data);
       setAssessment(response.data);
     });
@@ -34,7 +34,7 @@ function AssignedAssessment(props) {
     console.log(">>>>>>>>>>", data);
 
     axios
-      .put(`https://localhost:44333/api/Assessment/${id}`, data)
+      .put(`https://obesystem.azurewebsites.net/api/Assessment/${id}`, data)
       .then((response) => {
         console.log(response.data);
       });

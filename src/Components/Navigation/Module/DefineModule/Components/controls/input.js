@@ -1,9 +1,16 @@
 import {TextField} from '@material-ui/core';
+import * as yup from "yup";
+import { withFormik } from 'formik';
 import React from 'react';
 
-export default function input(props) {
+const validationsForm = {
+    name: yup.string().required("Required"),
+  
+  };
+ function input(props) {
+     const {name, label, value, onChange} = props;
 
-    const {name, label, value, onChange} = props;
+
     return (
         <TextField  
                     autoComplete='off'
@@ -17,3 +24,11 @@ export default function input(props) {
         />
     )
 }
+
+const Input = withFormik({
+
+    validationSchema: yup.object().shape(validationsForm),
+  
+  })(input);
+
+  export default (Input)

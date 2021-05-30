@@ -16,7 +16,7 @@ export default function PoList() {
   var [polist, setPolist] = useState([]);
 
   useEffect(() => {
-    axios.get("https://localhost:44333/api/Polist").then((response) => {
+    axios.get("https://obesystem.azurewebsites.net/api/Polist").then((response) => {
       console.log(response);
       setPolist(response.data);
       console.log(response.data);
@@ -25,7 +25,7 @@ export default function PoList() {
 
   const handleDeletePo = (id) => {
     axios
-      .delete(`https://localhost:44333/api/polist/${id}`)
+      .delete(`https://obesystem.azurewebsites.net/api/polist/${id}`)
       .then((response) => {
         console.log(response.data);
       });

@@ -8,8 +8,25 @@ import FormControl from "@material-ui/core/FormControl";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import axios from "axios";
+import * as yup from "yup";
+import { withFormik } from "formik";
 
-function DefineLo() {
+const validationsForm = {
+  Lo_code: yup.string().required("Required"),
+  Lo_name: yup.string().required("Required"),
+  description: yup.string().required("Required"),
+  Weight: yup.string().required("Required")
+  
+};
+
+function DefineLo(props) {
+  const {
+    touched,
+    errors,
+    handleBlur,
+  } = props;
+
+
   const [LoCode, setLoCode] = useState("");
   const [LoName, setLoName] = useState("");
   const [Description, setDescription] = useState("");
@@ -26,7 +43,7 @@ function DefineLo() {
     };
     console.log(data);
 
-    axios.post("https://localhost:44333/api/Lolist", data).then((res) => {
+    axios.post("https://obesystem.azurewebsites.net/api/Lolist", data).then((res) => {
       console.log(res);
       console.log(res.data);
     });
@@ -39,11 +56,15 @@ function DefineLo() {
           <TextField
             style={{ flex: 0.1 }}
             label="LO Code"
+            name='Lo_code'
             id="outlined-start-adornment"
             className=""
             name="Lo_code"
             onChange={(e) => setLoCode(e.target.value)}
             variant="outlined"
+            onBlur={handleBlur}
+            helperText={touched.Lo_code ? errors.Lo_code : ""}
+            error={touched.Lo_code && Boolean(errors.Lo_code)}
           />
 
           <TextField
@@ -55,6 +76,9 @@ function DefineLo() {
             fullWidth
             variant="outlined"
             onChange={(e) => setLoName(e.target.value)}
+            onBlur={handleBlur}
+            helperText={touched.Lo_name ? errors.Lo_name : ""}
+            error={touched.Lo_name && Boolean(errors.Lo_name)}
           />
 
           <TextField
@@ -65,6 +89,9 @@ function DefineLo() {
             className=""
             fullWidth
             variant="outlined"
+            onBlur={handleBlur}
+            helperText={touched.Weight ? errors.Weight : ""}
+            error={touched.Weight && Boolean(errors.Weight)}
             onChange={(e) => setWeight(e.target.value)}
           />
         </div>
@@ -100,4 +127,8 @@ function DefineLo() {
   );
 }
 
-export default DefineLo;
+const DefineLoForm = withFormik({
+  validationSchema: yup.object().shape(validationsForm),
+})(DefineLo);
+
+export default DefineLoForm;

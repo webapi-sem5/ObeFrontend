@@ -2,18 +2,27 @@ import { Grid } from '@material-ui/core';
 import React from 'react';
 import Controls from '../Components/controls/Control';
 import { useState, useEffect } from 'react'
-import {makeStyles} from '@material-ui/core'
 import axios from 'axios'
 import { v4 as uuidv4 } from 'uuid';
+import * as yup from "yup";
+import { withFormik } from "formik";
+import { TextField, makeStyles } from "@material-ui/core";
 
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-import Checkbox from "@material-ui/core/Checkbox";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
+const validationsForm = {
+    assessmentName: yup.string().required("Required"),
+    marks: yup.string().required("Required"),
+    
+  };
 
 
 
-function AssessmentForm() {
+
+function AssessmentForm(props) {
+    const {
+        touched,
+        errors,
+        handleBlur,
+      } = props;
 
 
     const UUID = uuidv4() ;
@@ -32,7 +41,7 @@ function AssessmentForm() {
         }
 
 
-        axios.post("https://localhost:44333/api/assessment",data)
+        axios.post("https://obesystem.azurewebsites.net/api/assessment",data)
         .then((res) => {
           console.log(res)
           console.log(res.data)
@@ -59,19 +68,28 @@ function AssessmentForm() {
        <form className={classes.root} onSubmit={handleSubmit}>
            <Grid container>
                <Grid item xs= {6}>
-                    <Controls.Input
-                    name='Assessment Name'
+                    <TextField
+                    name='assessmentName'
                     label='Type:Final Evaluation,Practical,Assignment,Workshop,Project'
                     onChange={(e)=>setType(e.target.value)}
                     // options={getTypeCollection}
+                    variant="outlined"
+                    onBlur={handleBlur}
+                    helperText={touched.assessmentName ? errors.assessmentName : ""}
+                    error={touched.assessmentName && Boolean(errors.assessmentName)}
                     />
                </Grid>
                <Grid item xs ={6}>
 
-               <Controls.Input  
+               <TextField
                 label="Marks"
                 name='marks'
                 onChange={(e)=>setMarks(e.target.value)}
+                variant="outlined"
+                // onBlur={handleBlur}
+                helperText={touched.marks ? errors.marks : ""}
+                error={touched.marks && Boolean(errors.marks)}
+                
                 />
 
             
@@ -93,4 +111,8 @@ function AssessmentForm() {
     )
 }
 
-export default AssessmentForm
+const AssessForm = withFormik({
+    validationSchema: yup.object().shape(validationsForm),
+  })(AssessmentForm);
+
+export default AssessForm

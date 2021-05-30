@@ -8,8 +8,23 @@ import FormControl from "@material-ui/core/FormControl";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import axios from "axios";
+import * as yup from "yup";
+import { withFormik } from "formik";
 
-function DefinePo() {
+const validationsForm = {
+  Po_code: yup.string().required("Required"),
+  Po_name: yup.string().required("Required"),
+  description: yup.string().required("Required")
+  
+};
+
+function DefinePo(props) {
+  const {
+    touched,
+    errors,
+    handleBlur,
+  } = props;
+
   const [PoCode, setPoCode] = useState("");
   const [PoName, setPoName] = useState("");
   const [Description, setDescription] = useState("");
@@ -27,7 +42,7 @@ function DefinePo() {
     };
     console.log(data);
 
-    axios.post("https://localhost:44333/api/Polist", data).then((res) => {
+    axios.post("https://obesystem.azurewebsites.net/api/Polist", data).then((res) => {
       console.log(res);
       console.log(res.data);
     });
@@ -45,6 +60,9 @@ function DefinePo() {
             name="Po_code"
             onChange={(e) => setPoCode(e.target.value)}
             variant="outlined"
+            onBlur={handleBlur}
+            helperText={touched.Po_code ? errors.Po_code : ""}
+            error={touched.Po_code && Boolean(errors.Po_code)}
           />
 
           <TextField
@@ -55,6 +73,9 @@ function DefinePo() {
             className=""
             fullWidth
             variant="outlined"
+            onBlur={handleBlur}
+            helperText={touched.Po_name ? errors.Po_name : ""}
+            error={touched.Po_name && Boolean(errors.Po_name)}
             onChange={(e) => setPoName(e.target.value)}
           />
         </div>
@@ -73,10 +94,16 @@ function DefinePo() {
             Description
           </InputLabel>
           <OutlinedInput
+            name='description'
             onChange={(e) => setDescription(e.target.value)}
             id="outlined-adornment-amount"
             startAdornment={<InputAdornment position="start"></InputAdornment>}
             labelWidth={60}
+            onBlur={handleBlur}
+            helperText={touched.description ? errors.description : ""}
+            error={touched.description && Boolean(errors.description)}
+
+
           />
         </FormControl>
       </div>
@@ -90,4 +117,8 @@ function DefinePo() {
   );
 }
 
-export default DefinePo;
+const DefinePoForm = withFormik({
+  validationSchema: yup.object().shape(validationsForm),
+})(DefinePo);
+
+export default DefinePoForm;

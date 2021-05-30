@@ -23,11 +23,11 @@ function AssignedLo(props) {
   let poid = props.match.params.id;
 
   useEffect(() => {
-    axios.get("https://localhost:44333/api/Lolist").then((response) => {
+    axios.get("https://obesystem.azurewebsites.net/api/Lolist").then((response) => {
       console.log(response);
       setLolist(response.data);
       console.log(response.data);
-      axios.get(`https://localhost:44333/api/Assessment/${poid}`).then((response)=>{
+      axios.get(`https://obesystem.azurewebsites.net/api/Assessment/${poid}`).then((response)=>{
      setModuleid(response.data.moduleId)
     })
 
@@ -57,12 +57,12 @@ function AssignedLo(props) {
     
     console.log(">>>>>>>>>>", data);
 
-   axios.get(`https://localhost:44333/api/Assessment/${poid}`).then((response)=>{
+   axios.get(`https://obesystem.azurewebsites.net/api/Assessment/${poid}`).then((response)=>{
      setModuleid(response.data.moduleid)
-     axios.put(`https://localhost:44333/api/lolist/${id}`, {moduleId:response.data.moduleId});
+     axios.put(`https://obesystem.azurewebsites.net/api/lolist/${id}`, {moduleId:response.data.moduleId});
       });
 
-      axios.post("https://localhost:44333/api/assessmentlos", data);
+      axios.post("https://obesystem.azurewebsites.net/api/assessmentlos", data);
 
     // .then(
     //   axios.spread((...allData) => {
@@ -82,7 +82,7 @@ function AssignedLo(props) {
     setdeleted(true);
 
     axios
-      .delete(`https://localhost:44333/api/assessmentlos/${id}`)
+      .delete(`https://obesystem.azurewebsites.net/api/assessmentlos/${id}`)
       .then((response) => {
         console.log(response.data);
       });

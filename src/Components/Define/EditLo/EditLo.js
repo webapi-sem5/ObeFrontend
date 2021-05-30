@@ -17,7 +17,7 @@ function EditLo(props) {
   const [Weight, setWeight] = useState("");
 
   useEffect(() => {
-    axios.get(`https://localhost:44333/api/Lolist/${LoId}`).then((res) => {
+    axios.get(`https://obesystem.azurewebsites.net/api/Lolist/${LoId}`).then((res) => {
       // console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",res.data);
       setLo(res.data);
     });
@@ -32,7 +32,7 @@ function EditLo(props) {
     console.log(data);
 
     axios
-      .put(`https://localhost:44333/api/Lolist/${LoId}`, data)
+      .put(`https://obesystem.azurewebsites.net/api/Lolist/${LoId}`, data)
       .then((res) => {
         console.log(res);
         console.log(res.data);

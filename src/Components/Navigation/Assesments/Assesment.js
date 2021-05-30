@@ -15,7 +15,7 @@ function Assessment() {
   var [assessment, setAssessment] = useState([]);
 
   useEffect(() => {
-    axios.get("https://localhost:44333/api/Assessment").then((response) => {
+    axios.get("https://obesystem.azurewebsites.net/api/Assessment").then((response) => {
       console.log("This is coming from Assessment ", response.data);
       setAssessment(response.data);
     });
@@ -23,7 +23,7 @@ function Assessment() {
 
   const handleDeleteAssessment = (id) => {
     axios
-      .delete(`https://localhost:44333/api/assessment/${id}`)
+      .delete(`https://obesystem.azurewebsites.net/api/assessment/${id}`)
       .then((response) => {
         console.log(response.data);
        
@@ -39,13 +39,13 @@ function Assessment() {
     
     
     axios
-    .put(`https://localhost:44333/api/lolist/${id}`, dataid)
+    .put(`https://obesystem.azurewebsites.net/api/lolist/${id}`, dataid)
     .then((response) => {
       console.log(response.data);
     });
 
     axios
-      .delete(`https://localhost:44333/api/assessmentlos/${id}`)
+      .delete(`https://obesystem.azurewebsites.net/api/assessmentlos/${id}`)
       .then((response) => {
         console.log(response.data);
 
@@ -57,7 +57,7 @@ function Assessment() {
   return (
   
     <div>
-          <TableContainer component={Paper}>
+    <TableContainer component={Paper}>
       <div style={{ display: "flex" }}>
         <h3 style={{ textAlign: "center", flex: 1.2 }}>ASSESSMENTS LIST</h3>
         <div style={{ flex: 0.2 }}>
