@@ -80,7 +80,7 @@ function EmpolyeeForm(props) {
 
     console.log(data);
 
-    axios.post("https://obesystem.azurewebsites.net/api/module", data).then((res) => {
+    axios.post("https://obesystemtesting.azurewebsites.net/api/module", data).then((res) => {
       console.log(res);
       console.log(res.data);
     });

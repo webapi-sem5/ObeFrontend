@@ -42,7 +42,7 @@ function DefinePo(props) {
     };
     console.log(data);
 
-    axios.post("https://obesystem.azurewebsites.net/api/Polist", data).then((res) => {
+    axios.post("https://obesystemtesting.azurewebsites.net/api/Polist", data).then((res) => {
       console.log(res);
       console.log(res.data);
     });

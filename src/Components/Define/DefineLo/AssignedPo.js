@@ -20,7 +20,7 @@ export default function AssignedPo(props) {
   let loid = props.match.params.id;
 
   useEffect(() => {
-    axios.get("https://obesystem.azurewebsites.net/api/Polist").then((response) => {
+    axios.get("https://obesystemtesting.azurewebsites.net/api/Polist").then((response) => {
       console.log(response);
       setPolist(response.data);
       console.log(response.data);
@@ -37,7 +37,7 @@ export default function AssignedPo(props) {
     console.log(">>>>>>>>>>", data);
 
     axios
-      .post("https://obesystem.azurewebsites.net/api/LolistPos", data)
+      .post("https://obesystemtesting.azurewebsites.net/api/LolistPos", data)
       .then((response) => {
         console.log(response.data);
       });
@@ -47,7 +47,7 @@ export default function AssignedPo(props) {
     setdeleted(true);
 
     axios
-      .delete(`https://obesystem.azurewebsites.net/api/lolistpos/${id}`)
+      .delete(`https://obesystemtesting.azurewebsites.net/api/lolistpos/${id}`)
       .then((response) => {
         console.log(response.data);
       });

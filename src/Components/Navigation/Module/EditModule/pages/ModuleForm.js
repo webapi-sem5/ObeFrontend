@@ -35,7 +35,7 @@ function EmpolyeeForm({ moduleId }) {
   const [module, setModule] = useState({});
 
   useEffect(() => {
-    axios.get(`https://obesystem.azurewebsites.net/api/module/${moduleId}`).then((res) => {
+    axios.get(`https://obesystemtesting.azurewebsites.net/api/module/${moduleId}`).then((res) => {
       // console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",res.data);
       setModule(res.data);
     });
@@ -51,7 +51,7 @@ function EmpolyeeForm({ moduleId }) {
     console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>", data);
 
     axios
-      .put(`https://obesystem.azurewebsites.net/api/module/${moduleId}`, data)
+      .put(`https://obesystemtesting.azurewebsites.net/api/module/${moduleId}`, data)
       .then((res) => {
         console.log(res);
         console.log(res.data);

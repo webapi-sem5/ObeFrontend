@@ -41,7 +41,7 @@ function AssessmentForm(props) {
         }
 
 
-        axios.post("https://obesystem.azurewebsites.net/api/assessment",data)
+        axios.post("https://obesystemtesting.azurewebsites.net/api/assessment",data)
         .then((res) => {
           console.log(res)
           console.log(res.data)

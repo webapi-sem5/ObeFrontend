@@ -18,12 +18,12 @@ function Module() {
   const [assessment, setAssessment] = useState([])
 
   useEffect(() => {
-    axios.get("https://obesystem.azurewebsites.net/api/Module").then((response) => {
+    axios.get("https://obesystemtesting.azurewebsites.net/api/Module").then((response) => {
       setModule(response.data);
       console.log(response.data);
     });
 
-    axios.get("https://obesystem.azurewebsites.net/api/assessment").then((response) => {
+    axios.get("https://obesystemtesting.azurewebsites.net/api/assessment").then((response) => {
       setAssessment(response.data);
       console.log(response.data);
     });
@@ -31,7 +31,7 @@ function Module() {
 
   const handleDeleteModule = (id) => {
     axios
-      .delete(`https://obesystem.azurewebsites.net/api/module/${id}`)
+      .delete(`https://obesystemtesting.azurewebsites.net/api/module/${id}`)
       .then((response) => {
         console.log(response.data);
       });

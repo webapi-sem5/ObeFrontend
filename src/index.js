@@ -8,7 +8,7 @@ import axios from "axios";
 import Signup from "./Components/Login/Signup";
 import LoginForm from "./Components/Login/LoginForm";
 
-axios.defaults.baseURL= 'https://obesystem.azurewebsites.net/api/';
+axios.defaults.baseURL= 'https://obesystemtesting.azurewebsites.net/api/';
 axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
 
 

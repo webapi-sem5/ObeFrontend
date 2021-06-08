@@ -22,12 +22,15 @@ import EditModule from './Components/Navigation/Module/EditModule/pages/Modules'
 import Module from './Components/Navigation/Module/Module'
 import DefineAssessment from './Components/Navigation/Assesments/DefineAssessment/pages/Assessments'
 import AssignThreshold from './Components/Define/AssignThreshold/AssignThreshold';
+import AssignGrade from './Components/Define/AssignGrade/AssignGrade';
 
 import Student from './Components/Navigation/Students/Students'
 
 
 import StudentMarks from './Components/Define/StudentMarks/StudentMarks'
 import LoginForm from './Components/Login/LoginForm';
+
+import Home from './Components/Navigation/Home/Home';
 
 
 function App() {
@@ -49,6 +52,7 @@ function App() {
             <Route path="/module/create" exact component={DefineModule} />
             <Route path="/module/definethreshold/:id" exact component={AssignThreshold} />
             <Route path="/module/defineassessment/:id" exact component={AssignedAssessment} />
+            <Route path="/module/definegrade/:id" exact component={AssignGrade} />
             <Route path="/module/edit/:id"  component={EditModule} />
             <Route path="/module" exact component={Module} />
             <Route path="/analysis" exact component={Analysis} />
@@ -63,7 +67,8 @@ function App() {
             <Route path="/poslist" exact  component={PoList} />
             <Route path="/normalize" exact component={Normalize} />
             <Route path="/loslist/definelo" exact component={DefineLo} />
-            <Route path="/poslist/definepo" exact component={DefinePo} />         
+            <Route path="/poslist/definepo" exact component={DefinePo} />      
+            <Route path="/" exact component={Home} /> 			
 
         </Switch>
          </div>

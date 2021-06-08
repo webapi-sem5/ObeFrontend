@@ -39,7 +39,7 @@ function Student(props) {
   
 
   useEffect(() => {
-    axios.get("https://obesystem.azurewebsites.net/api/student").then((response) => {
+    axios.get("https://obesystemtesting.azurewebsites.net/api/student").then((response) => {
       console.log(response);
       setSelectStudent(response.data);
       const studentBatch = new Map([...(response.data).map(stud=>[stud.batch])]);
@@ -53,7 +53,7 @@ function Student(props) {
 
   const handleDeleteLo = (id) => {
     axios
-      .delete(`https://obesystem.azurewebsites.net/api/student/${id}`)
+      .delete(`https://obesystemtesting.azurewebsites.net/api/student/${id}`)
       .then((response) => {
         console.log(response.data);
       });
@@ -69,7 +69,7 @@ function Student(props) {
     };
     console.log(data);
 
-    axios.post("https://obesystem.azurewebsites.net/api/student", data).then((res) => {
+    axios.post("https://obesystemtesting.azurewebsites.net/api/student", data).then((res) => {
       console.log(res);
       console.log(res.data);
     });

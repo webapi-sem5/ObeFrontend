@@ -15,7 +15,7 @@ function Assessment() {
   var [assessment, setAssessment] = useState([]);
 
   useEffect(() => {
-    axios.get("https://obesystem.azurewebsites.net/api/Assessment").then((response) => {
+    axios.get("https://obesystemtesting.azurewebsites.net/api/Assessment").then((response) => {
       console.log("This is coming from Assessment ", response.data);
       setAssessment(response.data);
     });
@@ -23,7 +23,7 @@ function Assessment() {
 
   const handleDeleteAssessment = (id) => {
     axios
-      .delete(`https://obesystem.azurewebsites.net/api/assessment/${id}`)
+      .delete(`https://obesystemtesting.azurewebsites.net/api/assessment/${id}`)
       .then((response) => {
         console.log(response.data);
        
@@ -39,13 +39,13 @@ function Assessment() {
     
     
     axios
-    .put(`https://obesystem.azurewebsites.net/api/lolist/${id}`, dataid)
+    .put(`https://obesystemtesting.azurewebsites.net/api/lolist/${id}`, dataid)
     .then((response) => {
       console.log(response.data);
     });
 
     axios
-      .delete(`https://obesystem.azurewebsites.net/api/assessmentlos/${id}`)
+      .delete(`https://obesystemtesting.azurewebsites.net/api/assessmentlos/${id}`)
       .then((response) => {
         console.log(response.data);
 

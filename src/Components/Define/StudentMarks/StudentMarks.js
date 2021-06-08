@@ -46,7 +46,7 @@ const StudentMarks = () => {
 
   useEffect(() => {
     // console.log('useEffect',lomark.mark)
-    axios.get("https://obesystem.azurewebsites.net/api/Assessment").then((response) => {
+    axios.get("https://obesystemtesting.azurewebsites.net/api/Assessment").then((response) => {
       console.log("This is coming from Assessment ", response.data);
       const uniquemodule =  new Map([...(response.data).map(stud=>[stud.module.module_name])]);
       setUniqueModule([...uniquemodule]);
@@ -60,7 +60,7 @@ const StudentMarks = () => {
     });
 
     axios
-      .get("https://obesystem.azurewebsites.net/api/student/")
+      .get("https://obesystemtesting.azurewebsites.net/api/student/")
       .then((response) => {
         const uniquestudent = new Map([...(response.data).map(stud=>[stud.batch])]);
          setUniqueStudent([...uniquestudent]);
@@ -75,7 +75,7 @@ const StudentMarks = () => {
     const assessmentId = event.target.value;
     setAssessmentId(assessmentId);
     axios
-      .get(`https://obesystem.azurewebsites.net/api/Assessment/${assessmentId}`)
+      .get(`https://obesystemtesting.azurewebsites.net/api/Assessment/${assessmentId}`)
       .then((response) => {
         console.log("This is coming from Assessment ", response.data);
         setAssessment(response.data);
@@ -94,7 +94,7 @@ const StudentMarks = () => {
     setStudentid(studentid);
 
     axios
-      .get(`https://obesystem.azurewebsites.net/api/student/${studentid}`)
+      .get(`https://obesystemtesting.azurewebsites.net/api/student/${studentid}`)
       .then((response) => {
         console.log("This is coming from Assessment ", response.data);
         setStudent(response.data);
@@ -119,11 +119,11 @@ const StudentMarks = () => {
     console.log("This Assessment sending data", assessmentStudent);
 
     // axios
-    //   .put(`https://obesystem.azurewebsites.net/api/student/${studentId}`, data)
+    //   .put(`https://obesystemtesting.azurewebsites.net/api/student/${studentId}`, data)
     //   .then((response) => {
     //     console.log('Add student success');
     axios
-      .post("https://obesystem.azurewebsites.net/api/assessmentstudents", assessmentStudent)
+      .post("https://obesystemtesting.azurewebsites.net/api/assessmentstudents", assessmentStudent)
       .then((response) => {
         console.log("assessmentStudent added success");
         for (const [key, value] of Object.entries(lomark)) {
@@ -134,7 +134,7 @@ const StudentMarks = () => {
           };
           console.log({ studentlo });
           axios
-            .post("https://obesystem.azurewebsites.net/api/studentlolists", studentlo)
+            .post("https://obesystemtesting.azurewebsites.net/api/studentlolists", studentlo)
             .then((response) => {
               console.log(`lo id ${key} inserted into server student lo `);
             })
@@ -227,7 +227,7 @@ const StudentMarks = () => {
             <MenuItem value="" disabled>
               Student
             </MenuItem>
-            <MenuItem value={null}>New</MenuItem>
+            
             {studentBatch.map((student) => (
               <MenuItem value={student.id}>{student.name}</MenuItem>
             ))}

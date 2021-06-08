@@ -26,49 +26,58 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function getSteps() {
-  return ['19th Batch', '6th Semester', 'Software Project'];
-}
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return 'Select campaign settings...';
-    case 1:
-      return 'What is an ad group anyways?';
-    case 2:
-      return 'This is the bit I really care about!';
-    default:
-      return 'Unknown step';
-  }
-}
 
-export default function Header() {
 
+const Header = () => {
+
+  const [activeStep, setActiveStep] = React.useState(0);
   const [username, setUsername] = useState();
+  
 
   useEffect(() => {
-    axios.get("https://obesystem.azurewebsites.net/api/user/").then((res) => {
+    axios.get("https://obesystemtesting.azurewebsites.net/api/user/").then((res) => {
       console.log(res);
       console.log(res.data.username);
       setUsername(res.data.username);
+
+      if(window.location.pathname === '/module' ){
+        setActiveStep(1)
+        
+      }
+      else if(window.location.pathname === '/assesment'){
+        setActiveStep(2)
+        
+      }
+      else if(window.location.pathname === '/loslist'){
+        setActiveStep(3)
+      }
+      else if(window.location.pathname === '/poslist'){
+        setActiveStep(4)
+      }
+      else if(window.location.pathname === '/student' || window.location.pathname === '/marks'){
+        setActiveStep(5)
+      }
+      else if(window.location.pathname === '/normalize'){
+        setActiveStep(6)
+      }
+      else if(window.location.pathname === '/analysis'){
+        setActiveStep(7)
+      }
      
     });
     
-  }, [])
+  }, [window.location.pathname, activeStep])
 
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
-  const [skipped, setSkipped] = React.useState(new Set());
-  const steps = getSteps();
+  
 
-  const isStepOptional = (step) => {
-    return step === 1;
-  };
+  
 
-  const isStepSkipped = (step) => {
-    return skipped.has(step);
-  };
+
+  console.log("This is from module  props >>>>>>", window.location.pathname)
+
+  
 
  
 
@@ -78,7 +87,7 @@ export default function Header() {
         <h3 style={{ textAlign: "center", flex: 1.2 }}></h3>
         <div style={{ flex: 0.2 }}>
           <div style={{display:"flex"}}>
-          {username && <Button href="/" variant="contained" color="secondary">
+          {username && <Button href="/" variant="outlined" color="default">
             {" "}
             {username}
           </Button>}
@@ -102,16 +111,29 @@ export default function Header() {
         </div>
       </div>
       <Stepper activeStep={activeStep}>
-        {steps.map((label, index) => {
-          const stepProps = {};
-          const labelProps = {};
         
-          return (
-            <Step key={label} {...stepProps}>
-              <StepLabel {...labelProps}>{label}</StepLabel>
+            <Step >
+              <StepLabel >Modules</StepLabel>
             </Step>
-          );
-        })}
+            <Step >
+              <StepLabel >Assessments</StepLabel>
+            </Step>
+            <Step >
+              <StepLabel >Learning Outcomes</StepLabel>
+            </Step>
+            <Step >
+              <StepLabel >Program Outcomes</StepLabel>
+            </Step>
+            <Step >
+              <StepLabel >Students</StepLabel>
+            </Step>
+            <Step >
+              <StepLabel >Normalize</StepLabel>
+            </Step>
+            <Step >
+              <StepLabel >Analysis</StepLabel>
+            </Step>
+        
       </Stepper>
 
       <Breadcrumbs/>
@@ -121,4 +143,5 @@ export default function Header() {
   );
 }
 
+export default Header;
 

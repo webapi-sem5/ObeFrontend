@@ -16,7 +16,7 @@ function LoList() {
   var [lolist, setLolist] = useState([]);
 
   useEffect(() => {
-    axios.get("https://obesystem.azurewebsites.net/api/Lolist").then((response) => {
+    axios.get("https://obesystemtesting.azurewebsites.net/api/Lolist").then((response) => {
       console.log(response);
       setLolist(response.data);
       console.log(response.data);
@@ -25,7 +25,7 @@ function LoList() {
 
   const handleDeleteLo = (id) => {
     axios
-      .delete(`https://obesystem.azurewebsites.net/api/lolist/${id}`)
+      .delete(`https://obesystemtesting.azurewebsites.net/api/lolist/${id}`)
       .then((response) => {
         console.log(response.data);
       });

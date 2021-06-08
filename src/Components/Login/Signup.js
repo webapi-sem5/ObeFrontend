@@ -32,7 +32,7 @@ const Signup = () => {
     console.log(user);
 
     axios
-      .post("https://obesystem.azurewebsites.net/api/user/register", user)
+      .post("https://obesystemtesting.azurewebsites.net/api/user/register", user)
       .then((res) => {
         console.log(res);
         console.log(res.data);
@@ -100,10 +100,11 @@ const Signup = () => {
             label="Password"
             placeholder="Enter password with special character"
             onChange={(e)=> setPassword(e.target.value)}
-            error='Enter password with special character'
+            
 
           />
           <TextField
+            type='password'
             fullWidth
             label="Confirm Password"
             placeholder="Confirm your password"

@@ -43,7 +43,7 @@ function DefineLo(props) {
     };
     console.log(data);
 
-    axios.post("https://obesystem.azurewebsites.net/api/Lolist", data).then((res) => {
+    axios.post("https://obesystemtesting.azurewebsites.net/api/Lolist", data).then((res) => {
       console.log(res);
       console.log(res.data);
     });

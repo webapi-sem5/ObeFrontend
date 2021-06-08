@@ -33,7 +33,7 @@ const Login = () => {
 
     console.log(user);
 
-    axios.post("https://obesystem.azurewebsites.net/api/user/login", user).then((res) => {
+    axios.post("https://obesystemtesting.azurewebsites.net/api/user/login", user).then((res) => {
       console.log(res);
       console.log(res.data.token);
       localStorage.setItem('token', res.data.token);
